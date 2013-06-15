@@ -1,0 +1,4 @@
+home:
+    method: get
+    pattern: /
+    action: All4m\Home::index
