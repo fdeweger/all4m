@@ -1,0 +1,7 @@
+database:
+    hostname: localhost
+    username: postgres
+    password: dygim00n
+    database: all4m
+
+debug: true

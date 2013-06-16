@@ -1,0 +1,7 @@
+database:
+    hostname: localhost
+    username: username
+    password: password
+    database: database
+
+debug: false
