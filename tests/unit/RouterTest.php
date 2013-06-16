@@ -5,7 +5,6 @@ use All4m\Components\Router\DummyTranslator;
 use All4m\Components\Router\Router;
 use Codeception\Util\Stub;
 use Silex\Application;
-use Silex\Controller;
 
 /**
  * Class RouterTest
@@ -43,7 +42,6 @@ class RouterTest extends \Codeception\TestCase\Test
     {
         $router = new Router(new DummyTranslator());
         $routes = $router->parse($this->getTestYml(), '/myapp');
-
         $route = $routes[0];
         $this->assertEquals('/myapp/', $route->getPattern());
     }
@@ -51,35 +49,44 @@ class RouterTest extends \Codeception\TestCase\Test
 
     public function testGet()
     {
-        $app = $this->getMockApp('get', '/', 'Home::index');
+        $app = $this->getMockApp('get', '/', 'Home::index', 'home');
         $router = new Router(new DummyTranslator());
         $routes = $router->parse($this->getTestYml());
         $router->applyToApp($app, array($routes[0]));
     }
 
-    /*public function testPost()
+    public function testPost()
     {
-        $app = $this->getMockApp('post', '/comment', 'dummydummydummy');
+        $app = $this->getMockApp('post', '/comment', 'dummydummydummy', 'addcomment');
         $router = new Router(new DummyTranslator());
         $routes = $router->parse($this->getTestYml());
         $router->applyToApp($app, array($routes[1]));
-    }*/
+    }
 
     public function testPut()
     {
-        $app = $this->getMockApp('put', '/comment', 'something');
+        $app = $this->getMockApp('put', '/comment', 'something', 'updatecomment');
         $router = new Router(new DummyTranslator());
         $routes = $router->parse($this->getTestYml());
-        $router->applyToApp($app, array($routes[1]));
+        $router->applyToApp($app, array($routes[2]));
     }
 
     public function testDelete()
     {
-        $app = $this->getMockApp('delete', '/comment/{id}', 'foobarbaz');
+        $app = $this->getMockApp('delete', '/comment/{id}', 'foobarbaz', 'deletecomment');
         $router = new Router(new DummyTranslator());
         $routes = $router->parse($this->getTestYml());
-        $router->applyToApp($app, array($routes[1]));
+        $router->applyToApp($app, array($routes[3]));
     }
+
+    public function testMatch()
+    {
+        $app = $this->getMockApp('match', '/foo', 'bar', 'idontknow');
+        $router = new Router(new DummyTranslator());
+        $routes = $router->parse($this->getTestYml());
+        $router->applyToApp($app, array($routes[4]));
+    }
+
 
     private function getTestYml()
     {
@@ -110,14 +117,18 @@ idontknow:
 ';
     }
 
-    private function getMockApp($method, $pattern, $action)
+    private function getMockApp($method, $pattern, $action, $name)
     {
-        $app = $this->getMock('\\Silex\\Application');
+        $controller = $this->getMock("\\Silex\\Controller", array(), array(), '', false);
+        $controller->expects($this->once())
+            ->method("bind")
+            ->with($this->equalTo($name));
 
+        $app = $this->getMock('\\Silex\\Application');
         $app->expects($this->once())
             ->method($method)
             ->with($this->equalTo($pattern), $this->equalTo($action))
-            ->will($this->returnValue(new Controller(new \Silex\Route())));
+            ->will($this->returnValue($controller));
 
         return $app;
     }
