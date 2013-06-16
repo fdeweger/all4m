@@ -2,3 +2,18 @@ home:
     method: get
     pattern: /
     action: All4m\Home::index
+
+video_next:
+    method: get
+    pattern: /video/next
+    action: All4m\Video::next
+
+video_previous:
+    method: get
+    pattern: /video/previous
+    action: All4m\Video::previous
+
+video_flag:
+    method: get
+    pattern: /video/flag/{id}
+    action: All4m\Video::flag
