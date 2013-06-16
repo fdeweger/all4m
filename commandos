@@ -1,0 +1,2 @@
+./vendor/bin/codecept run unit -v
+./vendor/bin/doctrine orm:schema-tool:update --dump-sql

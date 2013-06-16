@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "0202c620e1a3f3c87247638970c29cf2",
+    "hash": "7763b9e37a94027b0d37deeb6d75a605",
     "packages": [
         {
             "name": "alexandresalome/php-selenium",
@@ -1480,17 +1480,17 @@
         },
         {
             "name": "symfony/console",
-            "version": "v2.3.1",
+            "version": "2.3.x-dev",
             "target-dir": "Symfony/Component/Console",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "v2.3.1"
+                "reference": "35da735fae40d43a199ed51b30ac3f073404d1c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/v2.3.1",
-                "reference": "v2.3.1",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/35da735fae40d43a199ed51b30ac3f073404d1c6",
+                "reference": "35da735fae40d43a199ed51b30ac3f073404d1c6",
                 "shasum": ""
             },
             "require": {
@@ -1529,7 +1529,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
-            "time": "2013-06-11 07:15:14"
+            "time": "2013-06-15 17:55:04"
         },
         {
             "name": "symfony/css-selector",
@@ -2115,7 +2115,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "silex/silex": 20,
-        "symfony/yaml": 20
+        "symfony/yaml": 20,
+        "symfony/console": 20
     },
     "platform": [
 

@@ -3,56 +3,52 @@
  * Created by JetBrains PhpStorm.
  * User: frank
  * Date: 6/16/13
- * Time: 1:26 PM
+ * Time: 8:03 PM
  * To change this template use File | Settings | File Templates.
  */
 
 namespace All4m\Entity;
 
+
 /**
- * Class Spot
+ * Class NowPlaying
  * @package All4m\Entity
  * @Entity
  */
-class Spot
+class NowPlaying
 {
     /**
      * @var int
      * @Id
-     * @GeneratedValue(strategy="AUTO"))
+     * @GeneratedValue(strategy="IDENTITY"))
      * @Column(type="integer")
      */
     private $id;
+
     /**
      * @var string
-     * @Column(type="string", length=3)
+     * @Column(type="string", unique=true)
      */
     private $source;
-    /**
-     * @var \DateTime
-     * @Column(type="datetime")
-     */
-    private $createDate;
+
     /**
      * @var Track
-     * @ManyToOne(targetEntity="Track", inversedBy="spots")
+     * @OneToOne(targetEntity="Track")
      */
     private $track;
 
     /**
-     * @return \DateTime
+     * @var DateTime
+     * @Column(type="datetime")
      */
-    public function getCreateDate()
-    {
-        return $this->createDate;
-    }
+    private $updateTime;
 
     /**
-     * @param \DateTime $createDate
+     * @param int $id
      */
-    public function setCreateDate($createDate)
+    public function setId($id)
     {
-        $this->createDate = $createDate;
+        $this->id = $id;
     }
 
     /**
@@ -64,11 +60,11 @@ class Spot
     }
 
     /**
-     * @param int $id
+     * @param string $source
      */
-    public function setId($id)
+    public function setSource($source)
     {
-        $this->id = $id;
+        $this->source = $source;
     }
 
     /**
@@ -80,11 +76,11 @@ class Spot
     }
 
     /**
-     * @param string $source
+     * @param \All4m\Entity\Track $track
      */
-    public function setSource($source)
+    public function setTrack($track)
     {
-        $this->source = $source;
+        $this->track = $track;
     }
 
     /**
@@ -96,10 +92,18 @@ class Spot
     }
 
     /**
-     * @param \All4m\Entity\Track $track
+     * @param \All4m\Entity\DateTime $updateTime
      */
-    public function setTrack($track)
+    public function setUpdateTime($updateTime)
     {
-        $this->track = $track;
+        $this->updateTime = $updateTime;
+    }
+
+    /**
+     * @return \All4m\Entity\DateTime
+     */
+    public function getUpdateTime()
+    {
+        return $this->updateTime;
     }
 }

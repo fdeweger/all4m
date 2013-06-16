@@ -14,7 +14,8 @@ namespace All4m\Entity;
  * @package All4m\Video
  * @Entity
  */
-class Track {
+class Track
+{
     /**
      * @var int
      * @Id
@@ -55,7 +56,7 @@ class Track {
 
     /**
      * @var string
-     * @Column(type="integer")
+     * @Column(type="string", unique=true)
      */
     private $canonicalName;
 
@@ -64,6 +65,12 @@ class Track {
      * @Column(type="string", length=16, nullable=true, unique=true)
      */
     private $youtubeId;
+
+    /**
+     * @var \DateTime
+     * Column(type="datetime")
+     */
+    private $createDate;
 
     /**
      * @var Spot[]
@@ -101,6 +108,22 @@ class Track {
     public function getCanonicalName()
     {
         return $this->canonicalName;
+    }
+
+    /**
+     * @param \DateTime $createDate
+     */
+    public function setCreateDate($createDate)
+    {
+        $this->createDate = $createDate;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreateDate()
+    {
+        return $this->createDate;
     }
 
     /**
@@ -214,4 +237,6 @@ class Track {
     {
         return $this->youtubeId;
     }
+
+
 }
