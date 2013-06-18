@@ -37,7 +37,12 @@ $pimple['config'] = $config;
 
 if ($config['database']) {
     $pimple['em'] = $pimple->share(function() use ($config) {
-        $dbConfig = Setup::createAnnotationMetadataConfiguration(array(__DIR__. "/Entity/"), $config['debug']);
+        $proxyDir = null;
+        if (isset($config['database']['proxydir'])) {
+            $proxyDir = $config['database']['proxydir'];
+        }
+
+        $dbConfig = Setup::createAnnotationMetadataConfiguration(array(__DIR__. '/Entity/'), $config['debug'], $proxyDir);
 
         $connection = array(
             'driver' => 'pdo_pgsql',
@@ -56,12 +61,12 @@ if ($config['monolog']) {
 }
 
 $defaultFilters = array();
-$defaultFilters[] = new ArtistFilter("justin bieber");
-$defaultFilters[] = new ArtistFilter("nicky minaj");
-$defaultFilters[] = new ArtistFilter("nicki minaj");
-$defaultFilters[] = new ArtistFilter("k3");
-$defaultFilters[] = new ArtistFilter("kabouter plop");
-$defaultFilters[] = new TitleFilter("last christmas");
+$defaultFilters[] = new ArtistFilter('justin bieber');
+$defaultFilters[] = new ArtistFilter('nicky minaj');
+$defaultFilters[] = new ArtistFilter('nicki minaj');
+$defaultFilters[] = new ArtistFilter('k3');
+$defaultFilters[] = new ArtistFilter('kabouter plop');
+$defaultFilters[] = new TitleFilter('last christmas');
 $pimple['default.filters'] = $defaultFilters;
 
 if (isset($config['session_videos'])) {

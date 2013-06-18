@@ -1,0 +1,24 @@
+{% extends '::base.html.twig' %}
+{% block topbar %}
+<div id="topbar">
+	<div class="container container-small">
+		<div class="scrollerwrapper pull-left">
+			<div class="scrollerleftfade"></div>
+			<div class="scrollerrightfade"></div>
+			<marquee id="tweetscroller" scrollamount=5>
+				<a href="#">@Gerdien:</a> Leuke site broer! -
+				<a href="#">@Ziao:</a> Dit ziet er echt niet uit, en marquee's zijn ZO jaren 90. -
+				<a href="#">@Radio538:</a> You're going down bra. -
+				<a href="#">@Frank:</a> Bedankt voor de complimenten, maar nu moet ik weer verder met mijn Amadeuswerk -
+				<a href="#">@Frank:</a> En even shameless spammen, ookal is het op mijn eigen site #all4m -
+				<a href="#">@Ziao:</a> Kom op Frank, dat kun je echt niet maken.. -
+				<a href="#">@Gerdien:</a> Ik sluit me bij Nick aan. Ik had niet gedacht dat je zo diep kon zinken -
+				<a href="#">@Frank:</a> Ach, ik ga toch miljoenen verdienen aan #all4m (see what I did there) en dan zijn dat slechts bijzaken -
+				<a href="#">@Ziao:</a> Dit gesprek gaat echt nergens heen. En het mooiste is dat ik het allemaal uit mijn duim zuig. -
+				<a href="#">@Gerdien:</a> #all4m FTW!
+			</marquee>
+		</div>
+		<div id="addtweet" class="btn btn-small btn-inverse pull-right">Add message via Twitter&nbsp;&nbsp;<i class="icon-comment icon-white"></i></div>
+	</div>
+</div>
+{% endblock %}

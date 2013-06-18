@@ -3,6 +3,7 @@ database:
     username: username
     password: password
     database: database
+    proxydir: /vagrant/cache/proxy
 
 debug: false
 

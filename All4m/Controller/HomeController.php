@@ -15,13 +15,10 @@ use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 
 class HomeController {
-    use ContainerAwareTrait;
-
     public function index(Request $request, Application $app)
     {
-        echo "Hello world.";
-        $logger = $this->get("logger");
-        $logger->emergency("It works...");
-        die();
+        return $app['twig']->render('index.html.twig', array(
+            'name' => "frank",
+        ));
     }
 }
