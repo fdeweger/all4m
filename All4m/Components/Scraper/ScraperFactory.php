@@ -20,7 +20,7 @@ class ScraperFactory
     public function getThreeFmScraper()
     {
         $client = new All4mClient($this->get('urls.3fm'));
-        $filters = $this->get('default_filters');
+        $filters = $this->get('default.filters');
         $filters[] = new NowPlayingFilter();
         return new Scraper($client, new ThreeFmParser(), $filters);
     }
@@ -28,7 +28,7 @@ class ScraperFactory
     public function GetFive38Scraper()
     {
         $client = new All4mClient($this->get('urls.538'));
-        $filters = $this->get('default_filters');
+        $filters = $this->get('default.filters');
         $filters[] = new NowPlayingFilter();
         return new Scraper($client, new Five38Parser(), $filters);
     }

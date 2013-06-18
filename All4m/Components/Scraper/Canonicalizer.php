@@ -30,6 +30,7 @@ class Canonicalizer
 
         //happens on 538
         $artist = str_replace('QUEEN/QUEEN', 'QUEEN', $artist);
+        $artist = str_replace('538 2014', '', $artist);
 
         $artist = preg_replace("/[^A-Z0-9]/", '', $artist);
 

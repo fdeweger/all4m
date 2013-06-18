@@ -9,4 +9,5 @@ use Symfony\Component\Console\Application;
 
 $app = new Application('All4m', '1');
 $app->add(new All4m\Commands\Interval());
+$app->add(new All4m\Commands\Youtube());
 $app->run();

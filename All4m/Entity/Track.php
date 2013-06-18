@@ -12,7 +12,7 @@ namespace All4m\Entity;
 /**
  * Class Track
  * @package All4m\Video
- * @Entity
+ * @Entity(repositoryClass="All4m\Repository\TrackRepository");
  */
 class Track implements TrackInterface
 {
@@ -62,13 +62,13 @@ class Track implements TrackInterface
 
     /**
      * @var string
-     * @Column(type="string", length=16, nullable=true, unique=true)
+     * @Column(type="string", length=16, nullable=true)
      */
     private $youtubeId;
 
     /**
      * @var \DateTime
-     * Column(type="datetime")
+     * @Column(type="datetime")
      */
     private $createDate;
 
@@ -77,6 +77,12 @@ class Track implements TrackInterface
      * @OneToMany(targetEntity="Spot", mappedBy="track");
      */
     private $spots;
+
+    /**
+     * @var int
+     * @Column(type="integer")
+     */
+    private $status = 0;
 
     public function __construct()
     {
@@ -241,6 +247,22 @@ class Track implements TrackInterface
     public function getYoutubeId()
     {
         return $this->youtubeId;
+    }
+
+    /**
+     * @param int $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 
     /**
