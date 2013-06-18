@@ -17,3 +17,8 @@ video_flag:
     method: get
     pattern: /video/flag/{id}
     action: All4m\Video::flag
+
+video_get:
+    method: get
+    pattern: /video/get/{id}
+    action: All4m\Video::getTrack

@@ -13,6 +13,7 @@ namespace All4m\Controller;
 use All4m\Components\ContainerAwareTrait;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 class VideoController
@@ -42,13 +43,7 @@ class VideoController
 
         $app['session']->set('previous', $previous);
 
-        $response = new \stdClass();
-        $response->id = $track->getId();
-        $response->artist = $track->getArtist();
-        $response->title = $track->getTitle();
-        $response->youtubeId = $track->getYoutubeId();
-
-        return $app->json($response);
+        return $this->trackResponse($app, $track);
     }
 
     public function flag(Request $request, Application $app, $id)
@@ -66,4 +61,27 @@ class VideoController
         $subRequest = Request::create('/video/next', 'GET');
         return $app->handle($subRequest, HttpKernelInterface::SUB_REQUEST);
     }
+
+    public function getTrack(Request $request, Application $app, $id)
+    {
+        if (!$app['debug']) {
+            return new Response('', 404);
+        }
+
+        $em = $this->get('em');
+        $track = $em->getRepository('\All4m\Entity\Track')->find($id);
+        return $this->trackResponse($app, $track);
+    }
+
+    private function trackResponse($app, $track)
+    {
+        $response = new \stdClass();
+        $response->id = $track->getId();
+        $response->artist = $track->getArtist();
+        $response->title = $track->getTitle();
+        $response->youtubeId = $track->getYoutubeId();
+
+        return $app->json($response);
+    }
+
 }

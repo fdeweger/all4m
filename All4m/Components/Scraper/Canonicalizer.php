@@ -32,6 +32,7 @@ class Canonicalizer
         $artist = str_replace('QUEEN/QUEEN', 'QUEEN', $artist);
         $artist = str_replace('538 2014', '', $artist);
 
+
         $artist = preg_replace("/[^A-Z0-9]/", '', $artist);
 
         $title = strtoupper($track->getTitle());
@@ -39,6 +40,11 @@ class Canonicalizer
         $title = str_replace('RMX', 'REMIX', $title);
         $title = str_replace('R.M.X', 'REMIX', $title);
         $title = str_replace('RADIO EDIT', '', $title);
+
+
+        //happens on 3fm
+        $title = str_replace('3FM MEGAHIT', '', $title);
+
         $title = preg_replace("/[^A-Z0-9]/", '', $title);
 
         if ('' != $artist && '' != $title) {

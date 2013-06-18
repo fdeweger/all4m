@@ -42,13 +42,24 @@ class YoutubeParser
         for ($i = 0; $i < count($results->feed->entry); $i++) {
             $entry = $results->feed->entry[$i];
             $author = trim(strtolower($entry->author[0]->name->{'$t'}));
+            $title = trim(strtolower($entry->title->{'$t'}));
+
+            if (false !== strpos($author, 'karaoke') || false !== strpos($title, 'karaoke')) {
+                continue;
+            }
+
             if ($vevo == -1 && substr($author, -4) == "vevo") {
+                $vevo = $i;
+            }
+
+            if ($author == "emimusic") {
                 $vevo = $i;
             }
 
             if ($artistInAuthor == -1 && strpos($author, $artist) !== false) {
                 $artistInAuthor = $i;
             }
+
             if (isset($entry->{'yt$statistics'})) {
                 if ($entry->{'yt$statistics'}->viewCount > $maxViews) {
                     $maxViews = $entry->{'yt$statistics'}->viewCount;

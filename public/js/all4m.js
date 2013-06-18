@@ -1,4 +1,5 @@
 var player = false;
+var track = false;
 
 var all4m = {
     currentlyPlaying: false,
@@ -15,7 +16,7 @@ var all4m = {
 
     onYouTubePlayerAPIReady: function() {
         all4m.currentlyPlaying = track;
-        var youtubeid = track.youtube_id;
+        var youtubeid = track.youtubeId;
 
         player = new YT.Player('video', {
           height: 450,
@@ -35,7 +36,7 @@ var all4m = {
 
     play: function(response) {
         all4m.currentlyPlaying = response;
-        player.loadVideoById(response.youtube_id)
+        player.loadVideoById(response.youtubeId)
         all4m.handleTrackMetaData(response)
     },
 
@@ -47,15 +48,12 @@ var all4m = {
     },
 
     next: function() {
-        all4m.load("next");
+        all4m.load("video/next");
     },
 
-    previous: function() {
-        all4m.load("previous");
-    },
 
     flag: function() {
-        all4m.load("flag/" + all4m.currentlyPlaying.id);
+        all4m.load("video/flag/" + all4m.currentlyPlaying.id);
     },
 
     load: function(url) {
@@ -71,11 +69,17 @@ var all4m = {
     handleTrackMetaData: function(track) {
         $("#cliptitle").html(track.artist + " - " + track.title);
         document.title = track.artist + " - " + track.title + " - All4M";
-        //todo: handle buy on itunes button
     }
     
 }
 
 $(document).ready(function() {
-    all4m.init();
+    $.ajax({
+        url: "video/next",
+        dataType: "json",
+        success: function(data) {
+            track = data;
+            all4m.init();
+        }
+    });
 });

@@ -37,6 +37,7 @@ class Youtube extends Command
             $url = "https://gdata.youtube.com/feeds/api/videos?v=2&q=" . $searchTerm . "&alt=json";
             $client = new All4mClient($url);
             $response = $client->getData();
+
             if ($parser->getYouTubeId($track, $response)) {
                 $em->persist($track);
                 $em->flush();
