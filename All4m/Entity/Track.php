@@ -78,12 +78,17 @@ class Track implements TrackInterface
      */
     private $spots;
 
+    public function __construct()
+    {
+        $this->createDate = new \DateTime();
+    }
+
     /**
      * @param string $artist
      */
     public function setArtist($artist)
     {
-        $this->artist = $artist;
+        $this->artist = ucwords(strtolower($artist));
     }
 
     /**
@@ -195,7 +200,7 @@ class Track implements TrackInterface
      */
     public function setTitle($title)
     {
-        $this->title = $title;
+        $this->title = ucwords(strtolower($title));
     }
 
     /**
@@ -238,5 +243,16 @@ class Track implements TrackInterface
         return $this->youtubeId;
     }
 
+    /**
+     * @param TrackInterFace $track
+     * @return Track
+     */
+    public static function FromTrackInterFace(TrackInterFace $track)
+    {
+        $ret = new Track();
+        $ret->setArtist($track->getArtist());
+        $ret->setTitle($track->getTitle());
 
+        return $ret;
+    }
 }

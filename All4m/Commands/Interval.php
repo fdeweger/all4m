@@ -10,6 +10,7 @@
 namespace All4m\Commands;
 
 use All4m\Components\Scraper\ScraperFactory;
+use All4m\Components\Scraper\SpotSaver;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -29,8 +30,11 @@ class Interval extends Command
         $scrapers[] = $factory->getThreeFmScraper();
         $scrapers[] = $factory->GetFive38Scraper();
 
+        $tracks = array();
+        $saver = new SpotSaver();
         foreach ($scrapers as $scraper) {
-            $scraper->scrape();
+            $tracks = $scraper->scrape();
+            $saver->save($tracks, $scraper->getSource());
         }
     }
 }

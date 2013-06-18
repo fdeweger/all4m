@@ -53,5 +53,15 @@ class Scraper
         foreach ($this->filters as $filter) {
             $tracks = array_filter($tracks, array($filter, "filter"));
         }
+
+        return $tracks;
+    }
+
+    /***
+     * @return string
+     */
+    public function getSource()
+    {
+        return $this->parser->getSource();
     }
 }

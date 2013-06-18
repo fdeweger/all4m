@@ -36,8 +36,16 @@ class Spot
     /**
      * @var Track
      * @ManyToOne(targetEntity="Track", inversedBy="spots")
+     * @JoinColumns({
+     *   @JoinColumn(name="track_id", referencedColumnName="id", onDelete="CASCADE")
+     * })
      */
     private $track;
+
+    public function __construct()
+    {
+        $this->createDate = new \DateTime();
+    }
 
     /**
      * @return \DateTime
