@@ -9,6 +9,8 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
+use All4m\Components\Scraper\Filter\ArtistFilter;
+use All4m\Components\Scraper\Filter\TitleFilter;
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 
@@ -34,17 +36,16 @@ $pimple = new Pimple();
 $pimple['config'] = $config;
 
 if ($config['database']) {
-    $dbConfig = Setup::createAnnotationMetadataConfiguration(array(__DIR__. "/Entity/"), $config['debug']);
+    $pimple['em'] = $pimple->share(function() use ($config) {
+        $dbConfig = Setup::createAnnotationMetadataConfiguration(array(__DIR__. "/Entity/"), $config['debug']);
 
-    $connection = array(
-        'driver' => 'pdo_pgsql',
-        'dbname' => $config['database']['database'],
-        'user' => $config['database']['username'],
-        'password' => $config['database']['password'],
-        'host' => $config['database']['hostname']
-    );
-
-    $pimple['em'] = $pimple->share(function() use ($connection, $dbConfig) {
+        $connection = array(
+            'driver' => 'pdo_pgsql',
+            'dbname' => $config['database']['database'],
+            'user' => $config['database']['username'],
+            'password' => $config['database']['password'],
+            'host' => $config['database']['hostname']
+        );
         return EntityManager::create($connection, $dbConfig);
     });
 }
@@ -52,6 +53,21 @@ if ($config['database']) {
 if ($config['monolog']) {
     $provider = new \All4m\Components\Provider\MonologProvider();
     $provider->register($pimple, $config['monolog']);
+}
+
+$defaultFilters = array();
+$defaultFilters[] = new ArtistFilter("justin bieber");
+$defaultFilters[] = new ArtistFilter("nicky minaj");
+$defaultFilters[] = new ArtistFilter("k3");
+$defaultFilters[] = new ArtistFilter("kabouter plop");
+$defaultFilters[] = new TitleFilter("last christmas");
+$pimple['default_filters'] = $defaultFilters;
+
+if (isset($config['urls'])) {
+    foreach ($config['urls'] as $name => $url) {
+        $key = 'urls.' . $name;
+        $pimple[$key] = $url;
+    }
 }
 
 \All4m\Components\Container::set($pimple);

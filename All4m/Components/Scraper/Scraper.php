@@ -18,23 +18,43 @@ abstract class Scraper
     private $client;
 
     /**
+     * @var Filter\FilterInterface[]
+     */
+    private $filters;
+
+    /**
      * @param All4mClient $client
      * @param string $source
+     * @param Filter\FilterInterface[]
      */
-    public function __construct(All4mClient $client)
+    public function __construct(All4mClient $client, array $filters = array())
     {
         $this->client = $client;
+        $this->filters = $filters;
     }
 
     public final function scrape()
     {
         $data = $this->client->getData();
         $tracks = $this->parse($data);
+
+        foreach ($tracks as $track) {
+            $track->setSource($this->getSource());
+        }
+
+        var_dump($tracks);
+        foreach ($this->filters as $filter) {
+            array_filter($tracks, array($filter, "filter"));
+        }
+
+        var_dump($tracks);
     }
 
     /**
      * @param string $data
-     * @return \All4m\Entity\Track[]
+     * @return \All4m\Entity\NowPlaying[]
      */
     abstract public function parse($data);
+
+    abstract protected function getSource();
 }

@@ -28,8 +28,8 @@ class All4mClient
         try {
             $client = new Client($this->url);
             $request = $client->get();
-            $request->send();
-            return $request->getResponseBody();
+            $response = $request->send();
+            return $response->getBody(true);
         } catch (\Exception $e) {
             $logger = $this->get('logger');
             $logger->warning('Failed to retrieve' . $this->url ." (" . $e->getCode() . ' : ' . $e->getMessage() . ')');

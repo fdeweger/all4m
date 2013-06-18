@@ -10,13 +10,13 @@
 namespace All4m\Components\Scraper;
 
 
-use All4m\Entity\Track;
+use All4m\Entity\NowPlaying;
 
 class ThreeFmScraper extends Scraper
 {
     /**
      * @param string $data
-     * @return \All4m\Entity\Track[]
+     * @return \All4m\Entity\NowPlaying[]
      */
     public function parse($data)
     {
@@ -39,10 +39,15 @@ class ThreeFmScraper extends Scraper
             return array();
         }
 
-        $track = new Track();
+        $track = new NowPlaying();
         $track->setArtist($data[0]->artist);
         $track->setTitle($data[0]->title);
 
         return array($track);
+    }
+
+    protected function getSource()
+    {
+        return "3FM";
     }
 }

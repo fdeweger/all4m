@@ -14,7 +14,7 @@ namespace All4m\Entity;
  * @package All4m\Video
  * @Entity
  */
-class Track
+class Track implements TrackInterface
 {
     /**
      * @var int

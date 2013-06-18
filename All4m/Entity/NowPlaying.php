@@ -15,7 +15,7 @@ namespace All4m\Entity;
  * @package All4m\Entity
  * @Entity
  */
-class NowPlaying
+class NowPlaying implements TrackInterface
 {
     /**
      * @var int
@@ -32,16 +32,43 @@ class NowPlaying
     private $source;
 
     /**
-     * @var Track
-     * @OneToOne(targetEntity="Track")
+     * @var string
+     * @Column(type="string")
      */
-    private $track;
+    private $artist;
 
     /**
-     * @var DateTime
+     * @var string
+     * @Column(type="string")
+     */
+    private $title;
+
+    /**
+     * @var \DateTime
      * @Column(type="datetime")
      */
     private $updateTime;
+
+    public function __construct()
+    {
+        $this->updateTime = new \DateTime();
+    }
+
+    /**
+     * @param string $artist
+     */
+    public function setArtist($artist)
+    {
+        $this->artist = $artist;
+    }
+
+    /**
+     * @return string
+     */
+    public function getArtist()
+    {
+        return $this->artist;
+    }
 
     /**
      * @param int $id
@@ -76,23 +103,23 @@ class NowPlaying
     }
 
     /**
-     * @param \All4m\Entity\Track $track
+     * @param string $title
      */
-    public function setTrack($track)
+    public function setTitle($title)
     {
-        $this->track = $track;
+        $this->title = $title;
     }
 
     /**
-     * @return \All4m\Entity\Track
+     * @return string
      */
-    public function getTrack()
+    public function getTitle()
     {
-        return $this->track;
+        return $this->title;
     }
 
     /**
-     * @param \All4m\Entity\DateTime $updateTime
+     * @param \DateTime $updateTime
      */
     public function setUpdateTime($updateTime)
     {
@@ -100,7 +127,7 @@ class NowPlaying
     }
 
     /**
-     * @return \All4m\Entity\DateTime
+     * @return \DateTime
      */
     public function getUpdateTime()
     {

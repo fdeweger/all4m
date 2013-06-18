@@ -10,7 +10,7 @@
 namespace All4m\Components\Scraper;
 
 
-use All4m\Entity\Track;
+use All4m\Entity\NowPlaying;
 
 class Five38Scraper extends Scraper
 {
@@ -34,10 +34,15 @@ class Five38Scraper extends Scraper
         $artist = trim(substr($data, $artistStart, $artistEnd - $artistStart));
         $title = trim(substr($data, $titleStart, $titleEnd - $titleStart));
 
-        $track = new Track();
+        $track = new NowPlaying();
         $track->setArtist($artist);
         $track->setTitle($title);
 
         return array($track);
+    }
+
+    protected function getSource()
+    {
+        return "538";
     }
 }
