@@ -5,3 +5,13 @@ database:
     database: all4m
 
 debug: true
+
+
+monolog:
+    name: 'test'
+    handlers:
+        main:
+            type: 'stream'
+            path: '/tmp/log'
+            level: 'notice'
+

@@ -13,4 +13,13 @@ class ClientTest extends \Codeception\TestCase\Test
         $matches = preg_match_all('/google/', $data);
         $this->assertGreaterThan(0, count($matches));
     }
+
+    public function test404()
+    {
+        $client = new All4mClient('http://www.google.com/akljfalkdja;lskjas;lkfdjaW');
+        $data = $client->getData();
+        $matches = preg_match_all('/google/', $data);
+        $this->assertGreaterThan(0, count($matches));
+    }
+
 }

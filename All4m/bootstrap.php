@@ -12,22 +12,49 @@ require __DIR__ . '/../vendor/autoload.php';
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 
+if (!isset($environment)) {
+    $filename = __DIR__ . '/../config/config.yml';
+} else {
+    $filename = __DIR__ . '/../config/config-' . $environment . '.yml';
+}
+
+if (!file_exists($filename)) {
+    throw new Exception('Configfile ' . $filename . ' doesn\'t exist');
+}
+
 $parser = new \Symfony\Component\Yaml\Yaml();
-$config = $parser->parse(file_get_contents(__DIR__ . '/../config/config.yml'));
+$config = $parser->parse(file_get_contents($filename));
 
 if (!isset($config['debug'])) {
     $config['debug'] = false;
 }
 
-$dbConfig = Setup::createAnnotationMetadataConfiguration(array(__DIR__. "/Entity/"), $config['debug']);
+$pimple = new Pimple();
 
-$connection = array(
-    'driver' => 'pdo_pgsql',
-    'dbname' => $config['database']['database'],
-    'user' => $config['database']['username'],
-    'password' => $config['database']['password'],
-    'host' => $config['database']['hostname']
-);
+$pimple['config'] = $config;
 
-$entityManager = EntityManager::create($connection, $dbConfig);
+if ($config['database']) {
+    $dbConfig = Setup::createAnnotationMetadataConfiguration(array(__DIR__. "/Entity/"), $config['debug']);
+
+    $connection = array(
+        'driver' => 'pdo_pgsql',
+        'dbname' => $config['database']['database'],
+        'user' => $config['database']['username'],
+        'password' => $config['database']['password'],
+        'host' => $config['database']['hostname']
+    );
+
+    $pimple['em'] = $pimple->share(function() use ($connection, $dbConfig) {
+        return EntityManager::create($connection, $dbConfig);
+    });
+}
+
+if ($config['monolog']) {
+
+}
+
+
+\All4m\Components\Container::Set($pimple);
+
+
 
