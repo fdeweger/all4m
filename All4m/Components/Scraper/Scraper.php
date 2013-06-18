@@ -10,7 +10,9 @@
 namespace All4m\Components\Scraper;
 
 
-abstract class Scraper
+use Symfony\Component\Yaml\Parser;
+
+class Scraper
 {
     /**
      * @var All4mClient
@@ -23,38 +25,33 @@ abstract class Scraper
     private $filters;
 
     /**
-     * @param All4mClient $client
-     * @param string $source
-     * @param Filter\FilterInterface[]
+     * @var ParserInterface
      */
-    public function __construct(All4mClient $client, array $filters = array())
+    private $parser;
+
+    /**
+     * @param All4mClient $client
+     * @param ParserInterface $parser
+     * @param \All4m\Components\Scraper\Filter\FilterInterface[] $filters
+     */
+    public function __construct(All4mClient $client, ParserInterface $parser, array $filters = array())
     {
         $this->client = $client;
         $this->filters = $filters;
+        $this->parser = $parser;
     }
 
     public final function scrape()
     {
         $data = $this->client->getData();
-        $tracks = $this->parse($data);
+        $tracks = $this->parser->parse($data);
 
         foreach ($tracks as $track) {
-            $track->setSource($this->getSource());
+            $track->setSource($this->parser->getSource());
         }
 
-        var_dump($tracks);
         foreach ($this->filters as $filter) {
-            array_filter($tracks, array($filter, "filter"));
+            $tracks = array_filter($tracks, array($filter, "filter"));
         }
-
-        var_dump($tracks);
     }
-
-    /**
-     * @param string $data
-     * @return \All4m\Entity\NowPlaying[]
-     */
-    abstract public function parse($data);
-
-    abstract protected function getSource();
 }

@@ -10,13 +10,12 @@
 namespace All4m\Components\Scraper\Filter;
 
 
-use All4m\Entity\NowPlaying;
 use All4m\Entity\TrackInterface;
 
 interface FilterInterface
 {
     /**
-     * @param NowPlaying $track
+     * @param TrackInterface $track
      * @return bool
      */
     public function filter(TrackInterface $track);

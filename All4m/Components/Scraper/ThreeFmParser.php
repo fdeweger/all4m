@@ -12,7 +12,7 @@ namespace All4m\Components\Scraper;
 
 use All4m\Entity\NowPlaying;
 
-class ThreeFmScraper extends Scraper
+class ThreeFmParser implements ParserInterface
 {
     /**
      * @param string $data
@@ -46,7 +46,7 @@ class ThreeFmScraper extends Scraper
         return array($track);
     }
 
-    protected function getSource()
+    public function getSource()
     {
         return "3FM";
     }

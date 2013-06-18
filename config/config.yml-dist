@@ -17,8 +17,10 @@ monolog:
             type: chrome
             level: debug
             formatter: Monolog\Formatter\ChromePHPFormatter
-        name: log
-        handlers:
-            null:
-                type: ~
+        null:
+            type: ~
     processors: [ Monolog\Processor\IntrospectionProcessor ]
+
+urls:
+    3fm: http://www.3fm.nl/data/cache/jsonp/nowplaying-laatste5.json
+    538: http://www.538.nl/static/last3.php

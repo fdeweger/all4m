@@ -12,7 +12,7 @@ namespace All4m\Components\Scraper;
 
 use All4m\Entity\NowPlaying;
 
-class Five38Scraper extends Scraper
+class Five38Parser implements ParserInterface
 {
     public function parse($data)
     {
@@ -41,7 +41,7 @@ class Five38Scraper extends Scraper
         return array($track);
     }
 
-    protected function getSource()
+    public function getSource()
     {
         return "538";
     }

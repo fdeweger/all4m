@@ -28,15 +28,11 @@ class TitleFilter implements FilterInterface
         $this->title = $title;
     }
     /**
-     * @param All4m\Entity\NowPlaying $track
+     * @param TrackInterface $track
      * @return bool
      */
     public function filter(TrackInterface $track)
     {
-        if (false === stripos($track->getTitle(), $this->title)) {
-            return true;
-        }
-
-        return false;
+        return false === stripos($track->getTitle(), $this->title);
     }
 }

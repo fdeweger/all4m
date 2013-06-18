@@ -25,7 +25,12 @@ class Interval extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $factory = new ScraperFactory();
-        $threeFmScraper = $factory->getThreeFmScraper();
-        $threeFmScraper->scrape();
+        $scrapers = array();
+        $scrapers[] = $factory->getThreeFmScraper();
+        $scrapers[] = $factory->GetFive38Scraper();
+
+        foreach ($scrapers as $scraper) {
+            $scraper->scrape();
+        }
     }
 }

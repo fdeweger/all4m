@@ -10,7 +10,6 @@
 namespace All4m\Components\Scraper\Filter;
 
 
-use All4m\Entity\NowPlaying;
 use All4m\Entity\TrackInterface;
 
 class ArtistFilter implements FilterInterface
@@ -28,15 +27,11 @@ class ArtistFilter implements FilterInterface
         $this->artist = $artist;
     }
     /**
-     * @param All4m\Entity\NowPlaying $track
+     * @param TrackInterface $track
      * @return bool
      */
     public function filter(TrackInterface $track)
     {
-        if (false === stripos($track->getArtist(), $this->artist)) {
-            return true;
-        }
-
-        return false;
+        return false === stripos($track->getArtist(), $this->artist);
     }
 }

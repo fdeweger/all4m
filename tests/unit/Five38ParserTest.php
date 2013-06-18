@@ -2,14 +2,14 @@
 namespace All4mTest;
 
 use All4m\Components\Scraper\All4mClient;
-use All4m\Components\Scraper\Five38Scraper;
+use All4m\Components\Scraper\Five38Parser;
 
-class Five38ScraperTest extends \Codeception\TestCase\Test
+class Five38ParserTest extends \Codeception\TestCase\Test
 {
     public function testParse()
     {
         $data = $this->getData();
-        $scraper = new Five38Scraper(new All4mClient(''));
+        $scraper = new Five38Parser();
         $tracks = $scraper->parse($data);
         $this->assertEquals(1, count($tracks));
         $this->assertEquals('Pink', $tracks[0]->getArtist());
@@ -19,7 +19,7 @@ class Five38ScraperTest extends \Codeception\TestCase\Test
     public function testEmptyResponse()
     {
         $data = '';
-        $scraper = new Five38Scraper(new All4mClient(''));
+        $scraper = new Five38Parser(new All4mClient(''));
         $tracks = $scraper->parse($data);
         $this->assertEquals(0, count($tracks));
     }
