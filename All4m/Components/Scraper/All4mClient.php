@@ -9,10 +9,13 @@
 
 namespace All4m\Components\Scraper;
 
+use All4m\Components\ContainerAwareTrait;
 use Guzzle\Http\Client;
 
 class All4mClient
 {
+    use ContainerAwareTrait;
+
     private $url;
 
     public function __construct($url)
@@ -22,9 +25,15 @@ class All4mClient
 
     public function getData()
     {
-        $client = new Client($this->url);
-        $request = $client->get();
-        $request->send();
-        return $request->getResponseBody();
+        try {
+            $client = new Client($this->url);
+            $request = $client->get();
+            $request->send();
+            return $request->getResponseBody();
+        } catch (\Exception $e) {
+            $logger = $this->get('logger');
+            $logger->warning('Failed to retrieve' . $this->url ." (" . $e->getCode() . ' : ' . $e->getMessage() . ')');
+            return '';
+        }
     }
 }

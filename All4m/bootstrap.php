@@ -50,11 +50,12 @@ if ($config['database']) {
 }
 
 if ($config['monolog']) {
-
+    $provider = new \All4m\Components\Provider\MonologProvider();
+    $provider->register($pimple, $config['monolog']);
 }
 
+\All4m\Components\Container::set($pimple);
 
-\All4m\Components\Container::Set($pimple);
 
 
 

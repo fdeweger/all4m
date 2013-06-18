@@ -5,3 +5,20 @@ database:
     database: database
 
 debug: false
+
+monolog:
+    name: log
+    handlers:
+        stream:
+            type: stream
+            filename: /tmp/log
+            level: notice
+        chrome:
+            type: chrome
+            level: debug
+            formatter: Monolog\Formatter\ChromePHPFormatter
+        name: log
+        handlers:
+            null:
+                type: ~
+    processors: [ Monolog\Processor\IntrospectionProcessor ]

@@ -10,15 +10,17 @@
 namespace All4m\Components;
 
 
-trait ContainerAware 
+trait ContainerAwareTrait
 {
     private $pimple;
 
     protected function get($key)
     {
+
         if (null === $this->pimple) {
             $this->pimple = Container::getContainer();
         }
+
         return $this->pimple[$key];
     }
 }

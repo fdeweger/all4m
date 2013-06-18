@@ -2,3 +2,5 @@
 .vagrant/
 vendor/
 tests/_log
+config.yml
+config-*.yml

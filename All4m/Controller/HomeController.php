@@ -10,13 +10,18 @@
 namespace All4m\Controller;
 
 
+use All4m\Components\ContainerAwareTrait;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 
 class HomeController {
+    use ContainerAwareTrait;
+
     public function index(Request $request, Application $app)
     {
         echo "Hello world.";
+        $logger = $this->get("logger");
+        $logger->emergency("It works...");
         die();
     }
 }

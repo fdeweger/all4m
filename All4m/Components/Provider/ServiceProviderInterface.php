@@ -12,5 +12,5 @@ namespace All4m\Components\Provider;
 
 interface ServiceProviderInterface
 {
-    public function register(Pimple $pimple, array $config);
+    public function register(\Pimple $pimple, array $config);
 }
