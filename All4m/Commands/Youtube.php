@@ -30,7 +30,7 @@ class Youtube extends Command
     {
         $em = $this->get('em');
         $parser = new YoutubeParser();
-        $tracks = $em->getRepository('\All4m\Entity\Track')->findBy(array("status" => 0));
+        $tracks = $em->getRepository('\All4m\Entity\Track')->findBy(array("youtubeId" => null), array("id" => "asc"));
 
         foreach ($tracks as $track) {
             $searchTerm = urlencode($track->GetArtist() . " " . $track->GetTitle());

@@ -11,6 +11,7 @@ namespace All4m\Controller;
 
 
 use All4m\Components\ContainerAwareTrait;
+use All4m\Entity\Track;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,19 +31,7 @@ class VideoController
 
         $em = $this->get('em');
         $track = $em->getRepository('\All4m\Entity\Track')->getNext($previous, $app['db']);
-
-        $track->setViews($track->getViews() + 1);
-        $em->persist($track);
-        $em->flush();
-
-        $previousCount = array_unshift($previous, $track->getId());
-
-        if ($previousCount > $this->get('default.session_videos')) {
-            $previous = array_slice($previous, 0, $this->get('default.session_videos'));
-        }
-
-        $app['session']->set('previous', $previous);
-
+        $this->handleTrack($app, $track, $em);
         return $this->trackResponse($app, $track);
     }
 
@@ -64,13 +53,31 @@ class VideoController
 
     public function getTrack(Request $request, Application $app, $id)
     {
-        if (!$app['debug']) {
-            return new Response('', 404);
-        }
-
         $em = $this->get('em');
         $track = $em->getRepository('\All4m\Entity\Track')->find($id);
+        $this->handleTrack($app, $track, $em);
         return $this->trackResponse($app, $track);
+    }
+
+    private function handleTrack(Application $app, Track $track, $em)
+    {
+        $track->setViews($track->getViews() + 1);
+        $em->persist($track);
+        $em->flush();
+
+        $previous = $app['session']->get('previous');
+
+        if (!is_array($previous)) {
+            $previous = array();
+        }
+
+        $previousCount = array_unshift($previous, $track->getId());
+
+        if ($previousCount > $this->get('default.session_videos')) {
+            $previous = array_slice($previous, 0, $this->get('default.session_videos'));
+        }
+
+        $app['session']->set('previous', $previous);
     }
 
     private function trackResponse($app, $track)
@@ -83,5 +90,4 @@ class VideoController
 
         return $app->json($response);
     }
-
 }

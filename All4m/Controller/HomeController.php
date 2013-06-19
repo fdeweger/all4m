@@ -17,8 +17,11 @@ use Symfony\Component\HttpFoundation\Request;
 class HomeController {
     public function index(Request $request, Application $app)
     {
-        return $app['twig']->render('index.html.twig', array(
-            'name' => "frank",
-        ));
+        return $app['twig']->render('index.html.twig', array("id" => 0));
+    }
+
+    public function play(Request $request, Application $app, $id)
+    {
+        return $app['twig']->render('index.html.twig', array("id" => $id));
     }
 }

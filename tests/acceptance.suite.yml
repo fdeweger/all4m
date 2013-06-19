@@ -15,4 +15,4 @@ modules:
         - WebHelper
     config:
         PhpBrowser:
-            url: 'http://www.all4m.dev/'
+            url: 'http://www.all4m.dev'

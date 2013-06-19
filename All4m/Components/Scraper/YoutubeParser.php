@@ -17,6 +17,7 @@ class YoutubeParser
 {
     public function getYouTubeId(Track $track, $data)
     {
+        //\Doctrine\Common\Util\Debug::dump($track);
         $results = json_decode($data);
 
         if (!isset($results->feed->entry)) {

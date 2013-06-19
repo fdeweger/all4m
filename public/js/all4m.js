@@ -74,8 +74,14 @@ var all4m = {
 }
 
 $(document).ready(function() {
+    if (selectedTrack && 0 != selectedTrack) {
+        var url = "/video/get/" + selectedTrack;
+        selectedTrack = 0;
+    } else {
+        url = "/video/next";
+    }
     $.ajax({
-        url: "video/next",
+        url: url,
         dataType: "json",
         success: function(data) {
             track = data;

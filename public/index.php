@@ -25,11 +25,7 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../resources/views',
 ));
 
-
 $router = new \All4m\Components\Router\Router(new \All4m\Components\Router\NamespacedControllerActionTranslator());
 $routes = $router->parseFromFile(__DIR__ . "/../config/routes.yml");
 $router->applyToApp($app, $routes);
-
-
-
 $app->run();

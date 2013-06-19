@@ -3,6 +3,11 @@ home:
     pattern: /
     action: All4m\Home::index
 
+play:
+    method: get
+    pattern: /play/{id}
+    action: All4m\Home::play
+
 video_next:
     method: get
     pattern: /video/next

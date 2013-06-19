@@ -1,0 +1,8 @@
+class_name: ApiGuy
+modules:
+    enabled: [PhpBrowser, REST, ApiHelper]
+    config:
+      PhpBrowser:
+          url: http://www.all4m.dev/
+      REST:
+          url: http://www.all4m.dev/video/

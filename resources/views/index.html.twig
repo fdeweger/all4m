@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 {% block stylesheets %}
-    <link href="css/bootstrap.css" type="text/css" rel="stylesheet" />
-    <link href="css/screen.css" type="text/css" rel="stylesheet" />
+    <link href="/css/bootstrap.css" type="text/css" rel="stylesheet" />
+    <link href="/css/screen.css" type="text/css" rel="stylesheet" />
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
 {% endblock %}
 
@@ -38,8 +38,11 @@
 {% block javascripts %}
     {{ parent() }}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script src="js/all4m.js"></script>
-    <script src="js/bootstrap/bootstrap-transition.js"></script>
-    <script src="js/bootstrap/bootstrap-tooltip.js"></script>
-    <script src="js/bootstrap/bootstrap-button.js"></script>
+    <script src="/js/all4m.js"></script>
+    <script src="/js/bootstrap/bootstrap-transition.js"></script>
+    <script src="/js/bootstrap/bootstrap-tooltip.js"></script>
+    <script src="/js/bootstrap/bootstrap-button.js"></script>
+    <script>
+        var selectedTrack = {{ id }};
+    </script>
 {% endblock %}
