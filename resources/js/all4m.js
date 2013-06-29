@@ -1,5 +1,6 @@
 var player = false;
 var track = false;
+var hostname = location.protocol + "//" + location.host;
 
 var all4m = {
     currentlyPlaying: false,
@@ -48,12 +49,12 @@ var all4m = {
     },
 
     next: function() {
-        all4m.load("video/next");
+        all4m.load(hostname + "/video/next");
     },
 
 
     flag: function() {
-        all4m.load("video/flag/" + all4m.currentlyPlaying.id);
+        all4m.load(hostname + "/video/flag/" + all4m.currentlyPlaying.id);
     },
 
     load: function(url) {
