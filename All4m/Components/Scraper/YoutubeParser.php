@@ -25,12 +25,17 @@ class YoutubeParser
         }
 
         $artist = explode(" ", strtolower(trim($track->GetArtist())));
-        if (strtoupper($artist[0]) == "THE") {
+        if ("the" == $artist[0]) {
             unset($artist[0]);
         }
         //no spaces in youtube usernames, if no vevo video is found, try to match the artist name against the youtube username
         //usefull for artist like the prodigy who have their own youtube channel but not a vevo channel.
         $artist = join("", $artist);
+
+        //we'll need this to later on filter out lyrics videos.
+        //but since lyrics is a commonly used word, we only do so
+        //if the word lyrics is not in the canonical name.
+        $lyricsInCanonicalName = strpos($track->getCanonicalName(), 'LYRICS');
 
         //official vevo channels
         $vevo = -1;
@@ -47,6 +52,13 @@ class YoutubeParser
 
             if (false !== strpos($author, 'karaoke') || false !== strpos($title, 'karaoke')) {
                 continue;
+            }
+
+            //try to filter out lyrics videos
+            if (false === $lyricsInCanonicalName) {
+                if (false !== strpos($author, 'lyrics') || false !== strpos($title, 'lyrics')) {
+                    continue;
+                }
             }
 
             if ($vevo == -1 && substr($author, -4) == "vevo") {

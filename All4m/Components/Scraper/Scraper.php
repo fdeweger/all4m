@@ -10,6 +10,7 @@
 namespace All4m\Components\Scraper;
 
 
+use All4m\Components\Scraper\Canonicalizer\CanonicalizerInterface;
 use Symfony\Component\Yaml\Parser;
 
 class Scraper
@@ -30,15 +31,22 @@ class Scraper
     private $parser;
 
     /**
+     * @var CanonicalizerInterface[]
+     */
+    private $canonicalizers;
+
+    /**
      * @param All4mClient $client
      * @param ParserInterface $parser
      * @param \All4m\Components\Scraper\Filter\FilterInterface[] $filters
+     * @param CanonicalizerInterface[] $canonicalizers
      */
-    public function __construct(All4mClient $client, ParserInterface $parser, array $filters = array())
+    public function __construct(All4mClient $client, ParserInterface $parser, array $filters = array(), $canonicalizers)
     {
         $this->client = $client;
         $this->filters = $filters;
         $this->parser = $parser;
+        $this->canonicalizers = $canonicalizers;
     }
 
     public final function scrape()
@@ -52,6 +60,10 @@ class Scraper
 
         foreach ($this->filters as $filter) {
             $tracks = array_filter($tracks, array($filter, "filter"));
+        }
+
+        foreach ($this->canonicalizers as $canonicalizer) {
+            $canonicalizer->makeCanonical($track);
         }
 
         return $tracks;

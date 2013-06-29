@@ -14,6 +14,7 @@ use All4m\Components\ContainerAwareTrait;
 use All4m\Entity\Spot;
 use All4m\Entity\Track;
 use All4m\Entity\TrackInterface;
+use All4m\Components\Scraper\Canonicalizer\Canonicalizer;
 
 class SpotSaver
 {

@@ -67,6 +67,7 @@ $defaultFilters[] = new ArtistFilter('nicki minaj');
 $defaultFilters[] = new ArtistFilter('k3');
 $defaultFilters[] = new ArtistFilter('kabouter plop');
 $defaultFilters[] = new ArtistFilter('sunclub');
+$defaultFilters[] = new ArtistFilter('anwb');
 $defaultFilters[] = new TitleFilter('last christmas');
 $pimple['default.filters'] = $defaultFilters;
 

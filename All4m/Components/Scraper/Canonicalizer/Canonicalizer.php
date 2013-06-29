@@ -7,14 +7,15 @@
  * To change this template use File | Settings | File Templates.
  */
 
-namespace All4m\Components\Scraper;
+namespace All4m\Components\Scraper\Canonicalizer;
 
 
 use All4m\Entity\Track;
+use All4m\Entity\TrackInterface;
 
-class Canonicalizer
+class Canonicalizer implements CanonicalizerInterface
 {
-    public function makeCanonical(Track $track)
+    public function makeCanonical(TrackInterface $track)
     {
         $artist = strtoupper($track->getArtist());
 
@@ -28,11 +29,6 @@ class Canonicalizer
         $artist = str_replace(' FT ', 'FEAT', $artist);
         $artist = str_replace('&', 'FEAT', $artist);
 
-        //happens on 538
-        $artist = str_replace('QUEEN/QUEEN', 'QUEEN', $artist);
-        $artist = str_replace('538 2014', '', $artist);
-
-
         $artist = preg_replace("/[^A-Z0-9]/", '', $artist);
 
         $title = strtoupper($track->getTitle());
@@ -41,14 +37,12 @@ class Canonicalizer
         $title = str_replace('R.M.X', 'REMIX', $title);
         $title = str_replace('RADIO EDIT', '', $title);
 
-
-        //happens on 3fm
-        $title = str_replace('3FM MEGAHIT', '', $title);
-
         $title = preg_replace("/[^A-Z0-9]/", '', $title);
 
         if ('' != $artist && '' != $title) {
             $track->setCanonicalName($artist . $title);
+        } else {
+            $track->setCanonicalName('');
         }
     }
 }

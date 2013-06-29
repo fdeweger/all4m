@@ -14,4 +14,6 @@ interface TrackInterface
 {
     public function getArtist();
     public function getTitle();
+    public function getCanonicalName();
+    public function setCanonicalName($canonicalName);
 }

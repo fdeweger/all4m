@@ -274,7 +274,7 @@ class Track implements TrackInterface
         $ret = new Track();
         $ret->setArtist($track->getArtist());
         $ret->setTitle($track->getTitle());
-
+        $ret->setCanonicalName($track->getCanonicalName());
         return $ret;
     }
 }

@@ -11,6 +11,9 @@ namespace All4m\Components\Scraper;
 
 
 use All4m\Components\ContainerAwareTrait;
+use All4m\Components\Scraper\Canonicalizer\Canonicalizer;
+use All4m\Components\Scraper\Canonicalizer\Five38Canonicalizer;
+use All4m\Components\Scraper\Canonicalizer\ThreeFMCanonicalizer;
 use All4m\Components\Scraper\Filter\NowPlayingFilter;
 
 class ScraperFactory
@@ -20,16 +23,28 @@ class ScraperFactory
     public function getThreeFmScraper()
     {
         $client = new All4mClient($this->get('urls.3fm'));
+
         $filters = $this->get('default.filters');
         $filters[] = new NowPlayingFilter();
-        return new Scraper($client, new ThreeFmParser(), $filters);
+
+        $canonicalizers = array();
+        $canonicalizers[] = new ThreeFMCanonicalizer();
+        $canonicalizers[] = new Canonicalizer();
+
+        return new Scraper($client, new ThreeFmParser(), $filters, $canonicalizers);
     }
 
     public function GetFive38Scraper()
     {
         $client = new All4mClient($this->get('urls.538'));
+
         $filters = $this->get('default.filters');
         $filters[] = new NowPlayingFilter();
-        return new Scraper($client, new Five38Parser(), $filters);
+
+        $canonicalizers = array();
+        $canonicalizers[] = new Five38Canonicalizer();
+        $canonicalizers[] = new Canonicalizer();
+
+        return new Scraper($client, new Five38Parser(), $filters, $canonicalizers);
     }
 }

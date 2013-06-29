@@ -49,6 +49,11 @@ class NowPlaying implements TrackInterface
      */
     private $updateTime;
 
+    /**
+     * @var strings
+     */
+    private $canonicalName;
+
     public function __construct()
     {
         $this->updateTime = new \DateTime();
@@ -133,4 +138,21 @@ class NowPlaying implements TrackInterface
     {
         return $this->updateTime;
     }
+
+    /**
+     * @param string $canonicalName
+     */
+    public function setCanonicalName($canonicalName)
+    {
+        $this->canonicalName = $canonicalName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCanonicalName()
+    {
+        return $this->canonicalName;
+    }
+
 }
