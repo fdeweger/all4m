@@ -28,7 +28,8 @@ class Interval extends Command
         $factory = new ScraperFactory();
         $scrapers = array();
         $scrapers[] = $factory->getThreeFmScraper();
-        $scrapers[] = $factory->GetFive38Scraper();
+        $scrapers[] = $factory->getFive38Scraper();
+        $scrapers[] = $factory->getQMusicScraper();
 
         $tracks = array();
         $saver = new SpotSaver();

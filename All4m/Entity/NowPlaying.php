@@ -64,7 +64,7 @@ class NowPlaying implements TrackInterface
      */
     public function setArtist($artist)
     {
-        $this->artist = $artist;
+        $this->artist = trim($artist);
     }
 
     /**
@@ -112,7 +112,7 @@ class NowPlaying implements TrackInterface
      */
     public function setTitle($title)
     {
-        $this->title = $title;
+        $this->title = trim($title);
     }
 
     /**

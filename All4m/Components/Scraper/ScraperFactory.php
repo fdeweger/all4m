@@ -34,7 +34,7 @@ class ScraperFactory
         return new Scraper($client, new ThreeFmParser(), $filters, $canonicalizers);
     }
 
-    public function GetFive38Scraper()
+    public function getFive38Scraper()
     {
         $client = new All4mClient($this->get('urls.538'));
 
@@ -46,5 +46,18 @@ class ScraperFactory
         $canonicalizers[] = new Canonicalizer();
 
         return new Scraper($client, new Five38Parser(), $filters, $canonicalizers);
+    }
+
+    public function getQMusicScraper()
+    {
+        $client = new All4mClient($this->get('urls.qmu'));
+
+        $filters = $this->get('default.filters');
+        $filters[] = new NowPlayingFilter();
+
+        $canonicalizers = array();
+        $canonicalizers[] = new Canonicalizer();
+
+        return new Scraper($client, new QMusicParser(), $filters, $canonicalizers);
     }
 }

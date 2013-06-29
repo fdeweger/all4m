@@ -56,14 +56,13 @@ class Scraper
 
         foreach ($tracks as $track) {
             $track->setSource($this->parser->getSource());
+            foreach ($this->canonicalizers as $canonicalizer) {
+                $canonicalizer->makeCanonical($track);
+            }
         }
 
         foreach ($this->filters as $filter) {
             $tracks = array_filter($tracks, array($filter, "filter"));
-        }
-
-        foreach ($this->canonicalizers as $canonicalizer) {
-            $canonicalizer->makeCanonical($track);
         }
 
         return $tracks;
