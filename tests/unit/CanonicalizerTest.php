@@ -7,7 +7,7 @@ class CanonicalizerTest extends \Codeception\TestCase\Test
 
     protected function _before()
     {
-        $this->can = new \All4m\Components\Scraper\Canonicalizer();
+        $this->can = new \All4m\Components\Scraper\Canonicalizer\Canonicalizer();
     }
 
     // tests
