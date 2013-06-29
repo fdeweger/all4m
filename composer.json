@@ -10,6 +10,9 @@
         "symfony/console": "2.3.x-dev",
         "guzzle/guzzle": "3.3.1",
         "monolog/monolog": "1.5.0",
-        "twig/twig": "1.6.5"
+        "twig/twig": "1.6.5",
+        "kriswallsmith/assetic": "1.1.x-dev",
+        "mrclay/minify": "dev-master",
+        "natxet/CssMin": "dev-master"
     }
 }
