@@ -1,7 +1,7 @@
- - google analytics
  - facebook like van een clip -> link delen
- - cookie wetgeving
  - about page
+ - varnish
+ - css / js minification
 
  nice to have:
  - plaatjes check als er geen vevo / artistintitle gevonden kan worden
