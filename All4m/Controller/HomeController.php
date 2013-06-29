@@ -15,13 +15,24 @@ use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 
 class HomeController {
+    use ContainerAwareTrait;
+
     public function index(Request $request, Application $app)
     {
-        return $app['twig']->render('index.html.twig', array("id" => 0));
+        return $app['twig']->render('index.html.twig', array('id' => 0, 'cachebust' => $this->get('cachebust')));
     }
 
     public function play(Request $request, Application $app, $id)
     {
-        return $app['twig']->render('index.html.twig', array("id" => $id));
+        $em = $this->get('em');
+        $track = $track = $em->getRepository('\All4m\Entity\Track')->find($id);
+        
+        return $app['twig']->render('index.html.twig',
+            array(
+                'id' => $id,
+                'artist' => $track->getArtist(),
+                'title' => $track->getTitle(),
+                'cachebust' => $this->get('cachebust')
+        ));
     }
 }

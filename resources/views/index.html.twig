@@ -1,14 +1,24 @@
 {% extends 'layout.html.twig' %}
 {% block stylesheets %}
-    <link href="/css/all4m-1372518721.css" type="text/css" rel="stylesheet" />
+    <link href="/css/all4m-{{ cachebust }}.css" type="text/css" rel="stylesheet" />
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
 {% endblock %}
+
+{% block title %}
+    {% if artist is defined and title is defined %}
+        {{ artist }} - {{ title }} - All4M";
+    {% else %}
+        Non stop music videos - All4M
+    {% endif %}
+{% endblock %}
+
 
 {% block body %}
 <div id="container" class="container">
 	<div id="header" class="container-small">
 		<a href="/" id="logo"></a>
-	</div>
+        <a href="#aboutModal" role="button" class="btn btn-primary" data-toggle="modal" style="float: right;">About All4M</a>
+    </div>
 
 	<div id="videowrapper" class="container-small">
 
@@ -28,16 +38,45 @@
 			<h1 id="cliptitle"></h1>
 		</div>
 		<div class="share pull-right">
-			share
+            <a href="#"
+               onclick="
+    var url = encodeURIComponent('http://www.all4m.tv/play/' + all4m.currentlyPlaying.id);
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+url,
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;">
+                Share on Facebook
+            </a>
+
 		</div>
 	</div>
+</div>
+
+<div id="aboutModal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" style="color: #fff">×</button>
+        <h3>About All4M</h3>
+    </div>
+    <div class="modal-body" id="modalBody">
+        <p>All4M was concieved after realizing that aren't any television station based on video clips anymore. We used to have MTV,
+        but nowadays they seem more interested in reality TV than in video clips. All4M is here to solve that!
+        </p>
+        <p>How does it work? All4M scans what is played on a couple of (Dutch) radio stations and looks on Youtube.com for the
+        music video. Alas, this proces is not 100% foolproof, so sometimes the clip we provide is not the official one. You can click
+        on 'This is not the real video' to flag the video and play a new one.</p>
+        <p>Big massive thanks to Ziao for not only designing the site, but also to kindly provide CSS / HTML for it. Thanks dude!</p>
+        <p>(C) 2013 F.D. de Weger, all4m@gmail.com</p>
+        <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Close</button>
+
+    </div>
 </div>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script src="/js/all4m-1372518721.js"></script>
+    <script src="/js/all4m-{{ cachebust }}.js"></script>
     <script>
         var selectedTrack = {{ id }};
     </script>

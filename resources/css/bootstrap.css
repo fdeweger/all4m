@@ -2836,8 +2836,8 @@ table .span24 {
   line-height: 18px;
   color: black;
   text-shadow: 0 1px 0 white;
-  opacity: 0.2;
-  filter: alpha(opacity=20);
+  opacity: 0.7;
+  filter: alpha(opacity=70);
 }
 /* line 12, ../../sass/_close.scss */
 .close:hover {
@@ -4613,7 +4613,6 @@ input[type="submit"].btn.btn-mini {
 /* line 52, ../../sass/_modals.scss */
 .modal-header {
   padding: 9px 15px;
-  border-bottom: 1px solid #eee;
 }
 /* line 56, ../../sass/_modals.scss */
 .modal-header .close {
@@ -4638,7 +4637,6 @@ input[type="submit"].btn.btn-mini {
   margin-bottom: 0;
   text-align: right;
   background-color: #f5f5f5;
-  border-top: 1px solid #ddd;
   -webkit-border-radius: 0 0 6px 6px;
   -moz-border-radius: 0 0 6px 6px;
   border-radius: 0 0 6px 6px;

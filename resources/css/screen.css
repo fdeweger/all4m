@@ -90,7 +90,7 @@ a:hover {
 }
 
 /* line 26, ../../sass/_misc.scss */
-h1 {
+h1, h3 {
   font-size: 1.5em;
   font-weight: normal;
 }
@@ -297,4 +297,17 @@ body {
 #container #meta #cliptitle {
   text-shadow: 0 2px 0 #000;
   margin-bottom: 10px;
+}
+
+
+#aboutModal {
+    background-color: #000;
+}
+
+modal-header {
+    border: 0px;
+}
+
+p {
+    padding-bottom: 20px;
 }
