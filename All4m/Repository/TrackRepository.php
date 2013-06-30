@@ -9,6 +9,7 @@
 
 namespace All4m\Repository;
 
+use All4m\Components\ContainerAwareTrait;
 use Doctrine\ORM\EntityRepository;
 
 
@@ -16,6 +17,7 @@ class TrackRepository extends EntityRepository
 {
     public function getNext(array $previous, $rawDb, $maxId = 0)
     {
+
         if (!$maxId) {
             $res = $rawDb->fetchAssoc('
             SELECT MAX(s.id)
@@ -43,6 +45,7 @@ class TrackRepository extends EntityRepository
         if (10 < $res['flags']  && 0.2 < ($res['flags'] / $res['views'])) {
             return $this->getNext($previous, $rawDb, $maxId);
         }
-        return $this->find($next);
+
+        return $this->find($res['track_id']);
     }
 }
