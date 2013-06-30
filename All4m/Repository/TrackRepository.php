@@ -20,7 +20,7 @@ class TrackRepository extends EntityRepository
 
         if (!$maxId) {
             $res = $rawDb->fetchAssoc('
-            SELECT MAX(s.id)
+            SELECT MAX(s.id) AS max
             FROM spot s
             JOIN track t ON s.track_id = t.id
             WHERE t.youtubeid IS NOT NULL');

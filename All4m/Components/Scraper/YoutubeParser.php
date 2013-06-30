@@ -65,7 +65,7 @@ class YoutubeParser
                 $vevo = $i;
             }
 
-            if ($author == "emimusic") {
+            if ($author == "emimusic" || $author == 'armadamusic' || $author == 'piasrecordings') {
                 $vevo = $i;
             }
 
