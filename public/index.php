@@ -20,7 +20,7 @@ $app->register(new Silex\Provider\SessionServiceProvider());
 
 $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
     'db.options' => array(
-        'driver' => 'pdo_pgsql',
+        'driver' => $config['database']['driver'],
         'dbname' => $config['database']['database'],
         'user' => $config['database']['username'],
         'password' => $config['database']['password'],
