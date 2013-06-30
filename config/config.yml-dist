@@ -4,6 +4,7 @@ database:
     password: password
     database: database
     proxydir: /vagrant/cache/proxy
+    driver: pdo_pgsql
 
 debug: false
 
