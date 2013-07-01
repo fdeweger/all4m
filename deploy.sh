@@ -37,3 +37,4 @@ fi
 
 rm /srv/all4m/current
 ln -s /srv/all4m/$DIR /srv/all4m/current
+service varnish restart

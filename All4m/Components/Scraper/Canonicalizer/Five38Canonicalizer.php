@@ -21,8 +21,12 @@ class Five38Canonicalizer implements CanonicalizerInterface
         $artist = str_ireplace('538 2014', '', $artist);
 
         $artist = preg_replace('/^\*[a-zA-Z]{2}:/', '', $artist);
-        $artist = trim($artist);
 
         $track->setArtist($artist);
+
+        $title = $track->getTitle();
+        $title = preg_replace('/^\*[a-zA-Z]{2}:/', '', $title);
+
+        $track->setTitle($title);
     }
 }

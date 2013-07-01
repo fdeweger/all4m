@@ -137,7 +137,7 @@ h1, h3 {
 body {
   background: url(../img/bg.png);
   color: #fff;
-  font-family: tahoma;
+  font-family: Tahoma, Arial, Verdana, sans-serif;
   font-size: 0.8em;
 }
 

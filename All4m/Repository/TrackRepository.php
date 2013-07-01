@@ -21,8 +21,8 @@ class TrackRepository extends EntityRepository
         if (!$maxId) {
             $res = $rawDb->fetchAssoc('
             SELECT MAX(s.id) AS max
-            FROM spot s
-            JOIN track t ON s.track_id = t.id
+            FROM Spot s
+            JOIN Track t ON s.track_id = t.id
             WHERE t.youtubeid IS NOT NULL');
             $maxId = $res['max'];
         }
@@ -33,16 +33,16 @@ class TrackRepository extends EntityRepository
 
 
         $res = $rawDb->fetchAssoc('
-            SELECT s.track_id, t.youtubeid, t.views, t.flags
-            FROM spot s
-            JOIN track t ON s.track_id = t.id
+            SELECT s.track_id, t.youtubeid, t.views, t.flags, t.status
+            FROM Spot s
+            JOIN Track t ON s.track_id = t.id
             WHERE s.id = ?', array((int) $next));
 
         if (!$res['youtubeid']) {
             return $this->getNext($previous, $rawDb, $maxId);
         }
 
-        if (10 < $res['flags']  && 0.2 < ($res['flags'] / $res['views'])) {
+        if (3 < $res['flags'] || 10 > $res['status']) {
             return $this->getNext($previous, $rawDb, $maxId);
         }
 

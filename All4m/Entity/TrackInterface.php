@@ -13,7 +13,9 @@ namespace All4m\Entity;
 interface TrackInterface 
 {
     public function getArtist();
+    public function setArtist($artist);
     public function getTitle();
+    public function setTitle($title);
     public function getCanonicalName();
     public function setCanonicalName($canonicalName);
 }
