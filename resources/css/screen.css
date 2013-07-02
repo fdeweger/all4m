@@ -74,6 +74,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 * {
   position: relative;
   box-sizing: border-box;
+  -moz-box-sizing: border-box;
 }
 
 /* line 14, ../../sass/_misc.scss */
