@@ -16,27 +16,24 @@ class Five38Parser implements ParserInterface
 {
     public function parse($data)
     {
-        $artistStart = stripos($data, '<h2>');
-        $artistEnd = stripos($data, "</h2>");
-
-        if (false === $artistStart || false === $artistEnd) {
+        if ('' == $data) {
+            return array();
+        }
+        $data = json_decode($data);
+        if (JSON_ERROR_NONE !== json_last_error()) {
             return array();
         }
 
-        $artistStart += 4;
-        $titleStart = $artistEnd + 5;
-        $titleEnd = stripos($data, "</div>");
-
-        if (false === $titleEnd) {
+        $data = $data->{538}->tracks;
+        //var_dump($data);die;
+        if (0 == count($data)) {
             return array();
         }
 
-        $artist = trim(substr($data, $artistStart, $artistEnd - $artistStart));
-        $title = trim(substr($data, $titleStart, $titleEnd - $titleStart));
-
+        $data = $data[0];
         $track = new NowPlaying();
-        $track->setArtist($artist);
-        $track->setTitle($title);
+        $track->setArtist($data->artist);
+        $track->setTitle($data->title);
 
         return array($track);
     }

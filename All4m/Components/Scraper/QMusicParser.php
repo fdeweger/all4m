@@ -9,7 +9,9 @@
 
 namespace All4m\Components\Scraper;
 
-
+/**
+ * THIS CLASS IS IN ALPHA STATE. Buggy and unreliable!
+ */
 use All4m\Entity\NowPlaying;
 
 class QMusicParser implements ParserInterface

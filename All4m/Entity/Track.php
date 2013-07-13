@@ -94,7 +94,7 @@ class Track implements TrackInterface
      */
     public function setArtist($artist)
     {
-        $this->artist = ucwords(strtolower($artist));
+        $this->artist = ucwords(strtolower(trim($artist)));
     }
 
     /**
@@ -206,7 +206,7 @@ class Track implements TrackInterface
      */
     public function setTitle($title)
     {
-        $this->title = ucwords(strtolower($title));
+        $this->title = ucwords(strtolower(trim($title)));
     }
 
     /**
