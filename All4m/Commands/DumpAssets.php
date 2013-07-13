@@ -18,6 +18,6 @@ class DumpAssets extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $dumper = new AssetDumper();
-        $dumper->dump();
+        $dumper->dump(false);
     }
 }

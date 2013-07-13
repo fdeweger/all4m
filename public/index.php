@@ -13,7 +13,7 @@ $app['debug'] = $config['debug'];
 
 if ($config['debug']) {
         $dumper = new All4m\Components\AssetDumper();
-        $dumper->dump();
+        $dumper->dump(true);
 }
 
 $app->register(new Silex\Provider\SessionServiceProvider());

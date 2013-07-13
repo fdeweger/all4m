@@ -26,6 +26,9 @@ var all4m = {
           events: {
             'onReady': all4m.onYouTubePlayerReady,
             'onStateChange': all4m.onYouTubePlayerStateChange
+          },
+          playerVars: {
+              'wmode': 'transparent'
           }
         });
     },

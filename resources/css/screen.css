@@ -232,7 +232,7 @@ body {
   background: #222;
 }
 /* line 83, ../../sass/screen.scss */
-#container #videowrapper #button-next, #container #videowrapper #button-prev {
+#container #videowrapper #button-next {
   position: absolute;
   cursor: pointer;
   width: 65px;
@@ -241,27 +241,12 @@ body {
   -webkit-transition-duration: 0.15s;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
   opacity: 0.4;
-}
-/* line 92, ../../sass/screen.scss */
-#container #videowrapper #button-next#button-prev, #container #videowrapper #button-prev#button-prev {
-  left: -100px;
-  background: url(../img/prev.png) center no-repeat;
-}
-/* line 95, ../../sass/screen.scss */
-#container #videowrapper #button-next#button-prev:hover, #container #videowrapper #button-prev#button-prev:hover {
-  left: -105px;
-}
-/* line 97, ../../sass/screen.scss */
-#container #videowrapper #button-next#button-next, #container #videowrapper #button-prev#button-next {
   right: -100px;
   background: url(../img/next.png) center no-repeat;
 }
 /* line 100, ../../sass/screen.scss */
-#container #videowrapper #button-next#button-next:hover, #container #videowrapper #button-prev#button-next:hover {
+#container #videowrapper #button-next#button-next:hover {
   right: -105px;
-}
-/* line 103, ../../sass/screen.scss */
-#container #videowrapper #button-next:hover, #container #videowrapper #button-prev:hover {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
   opacity: 1;
 }
