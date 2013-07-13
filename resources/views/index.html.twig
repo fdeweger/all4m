@@ -38,8 +38,16 @@
 			<h1 id="cliptitle"></h1>
 		</div>
 		<div class="share pull-right">
-            <a href="#"
-               onclick="
+            <a href="#" onclick="
+    var url = encodeURIComponent(hostname +  '/play/' + all4m.currentlyPlaying.id);
+    window.open(
+      'https://twitter.com/share?url=http%3A%2F%2F'+url,
+      '_blank',
+      'width=626,height=436');
+    return false;">
+                Share on Twitter
+            </a> -
+            <a href="#" onclick="
     var url = encodeURIComponent(hostname +  '/play/' + all4m.currentlyPlaying.id);
     window.open(
       'https://www.facebook.com/sharer/sharer.php?u='+url,
