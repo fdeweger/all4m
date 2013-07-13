@@ -26,6 +26,7 @@ class AssetDumper
 
         $js = new \Assetic\Asset\AssetCollection(array(
             new \Assetic\Asset\FileAsset($jsDir . 'all4m.js', $jsMin),
+            new \Assetic\Asset\FileAsset($jsDir . 'bootstrap-modal.js', $jsMin),
             new \Assetic\Asset\FileAsset($jsDir . 'retina.js'),
         ));
         $js = $js->dump();

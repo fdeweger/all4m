@@ -42,6 +42,13 @@ class TrackRepository extends EntityRepository
             return $this->getNext($previous, $rawDb, $maxId);
         }
 
+        //only preset vevo (aka good) results as the first 3
+        //videos.
+        if (3 > count($previous) && $res['status'] < 15) {
+            return $this->getNext($previous, $rawDb, $maxId);
+        }
+
+
         if (3 < $res['flags'] || 10 > $res['status']) {
             return $this->getNext($previous, $rawDb, $maxId);
         }
