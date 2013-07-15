@@ -5,11 +5,7 @@
 {% endblock %}
 
 {% block title %}
-    {% if artist is defined and title is defined %}
-        {{ artist }} - {{ title }} - All4M";
-    {% else %}
-        Non stop music videos - All4M
-    {% endif %}
+    {% if artist is defined and title is defined %}{{ artist }} - {{ title }} - All4M{% else %}Non stop music videos - All4M{% endif %}
 {% endblock %}
 
 

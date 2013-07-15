@@ -32,6 +32,7 @@ class HomeController {
                 'id' => $id,
                 'artist' => $track->getArtist(),
                 'title' => $track->getTitle(),
+                'youtubeId' => $track->getYoutubeId(),
                 'cachebust' => $this->get('cachebust')
         ));
     }
