@@ -52,11 +52,13 @@ var all4m = {
     },
 
     next: function() {
+        _gaq.push(['_trackEvent', 'Videos', 'Next']);
         all4m.load(hostname + "/video/next");
     },
 
 
     flag: function() {
+        _gaq.push(['_trackEvent', 'Videos', 'Flag']);
         all4m.load(hostname + "/video/flag/" + all4m.currentlyPlaying.id);
     },
 

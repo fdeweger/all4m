@@ -35,6 +35,7 @@
 		</div>
 		<div class="share pull-right">
             <a href="#" onclick="
+    _gaq.push(['_trackEvent', 'Share', 'Twitter']);
     var url = encodeURIComponent(hostname +  '/play/' + all4m.currentlyPlaying.id);
     window.open(
       'https://twitter.com/share?url=http%3A%2F%2F'+url,
@@ -44,6 +45,7 @@
                 Share on Twitter
             </a> -
             <a href="#" onclick="
+    _gaq.push(['_trackEvent', 'Share', 'Facebook']);
     var url = encodeURIComponent(hostname +  '/play/' + all4m.currentlyPlaying.id);
     window.open(
       'https://www.facebook.com/sharer/sharer.php?u='+url,
