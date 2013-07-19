@@ -39,12 +39,24 @@ class VideoController
     {
         $previous = $app['session']->get('previous');
 
-        if (is_array($previous) && $previous[0] == $id) {
-            $em = $this->get('em');
-            $track = $em->getRepository('\All4m\Entity\Track')->find($id);
-            $track->setFlags($track->getFlags() + 1);
-            $em->persist($track);
-            $em->flush();
+        $flags = $app['session']->get('flags');
+        if (!$flags) {
+            $flags = 1;
+        } else {
+            $flags++;
+        }
+        $app['session']->set('flags', $flags);
+
+        $plays = $app['session']->get('plays');
+
+        if ($this->canFlag($plays, $flags)) {
+            if (is_array($previous) && $previous[0] == $id) {
+                $em = $this->get('em');
+                $track = $em->getRepository('\All4m\Entity\Track')->find($id);
+                $track->setFlags($track->getFlags() + 1);
+                $em->persist($track);
+                $em->flush();
+            }
         }
 
         $subRequest = Request::create('/video/next', 'GET');
@@ -78,6 +90,13 @@ class VideoController
         }
 
         $app['session']->set('previous', $previous);
+        $plays = $app['session']->get('plays');
+        if (!$plays) {
+            $plays = 1;
+        } else {
+            $plays++;
+        }
+        $app['session']->set('plays', $plays);
     }
 
     private function trackResponse($app, $track)
@@ -88,6 +107,28 @@ class VideoController
         $response->title = $track->getTitle();
         $response->youtubeId = $track->getYoutubeId();
 
+        /**
+         * DEBUG
+         */
+        $response->ratio = $app['session']->get('flags') / $app['session']->get('plays');
+        $response->flags = $app['session']->get('flags');
+
         return $app->json($response);
+    }
+
+    private function canFlag($plays, $flags) {
+        if ($plays < 5 && $flags < 3) {
+            return true;
+        }
+
+        if ($flags > 15) {
+            return false;
+        }
+
+        if (($flags / $plays) < 0.12) {
+            return true;
+        }
+
+        return false;
     }
 }
