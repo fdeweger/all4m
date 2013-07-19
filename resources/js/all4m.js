@@ -91,7 +91,18 @@ $(document).ready(function() {
         dataType: "json",
         success: function(data) {
             track = data;
-            all4m.init();
+            //http://stackoverflow.com/questions/9038625/detect-if-device-is-ios
+            //http://stackoverflow.com/questions/8972726/youtube-api-not-working-with-ipad-iphone-non-flash-device
+            if (navigator.userAgent.match(/(iPad|iPhone|iPod)/g)) {
+                $("#video").html("<div id='ios-starter'>Click here to play!</div>");
+                $("#ios-starter").on('click touchstart', function(){
+                    $("#video").html("");
+                    all4m.init();
+                });
+
+            } else {
+                all4m.init();
+            }
         }
     });
 });
