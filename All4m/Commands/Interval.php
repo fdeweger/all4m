@@ -31,7 +31,6 @@ class Interval extends Command
         $scrapers[] = $factory->getFive38Scraper();
         $scrapers[] = $factory->getQMusicScraper();
 
-        $tracks = array();
         $saver = new SpotSaver();
         foreach ($scrapers as $scraper) {
             $tracks = $scraper->scrape();

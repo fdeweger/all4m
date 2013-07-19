@@ -3,6 +3,6 @@ modules:
     enabled: [PhpBrowser, REST, ApiHelper]
     config:
       PhpBrowser:
-          url: http://www.all4m.dev/
+          url: http://www.all4m.dev:8080/
       REST:
-          url: http://www.all4m.dev/video/
+          url: http://www.all4m.dev:8080/video/

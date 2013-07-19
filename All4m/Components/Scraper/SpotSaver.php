@@ -40,6 +40,8 @@ class SpotSaver
             if (!$trackAlreadyExists) {
                 $em->persist($track);
                 $em->flush();
+            } else {
+                $track = $trackAlreadyExists[0];
             }
 
             $spot = new Spot();
