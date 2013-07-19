@@ -25,7 +25,8 @@ var all4m = {
           videoId: youtubeid,
           events: {
             'onReady': all4m.onYouTubePlayerReady,
-            'onStateChange': all4m.onYouTubePlayerStateChange
+            'onStateChange': all4m.onYouTubePlayerStateChange,
+            'onError': all4m.next
           },
           playerVars: {
               'wmode': 'transparent'
