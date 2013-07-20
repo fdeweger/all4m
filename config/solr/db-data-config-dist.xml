@@ -1,0 +1,11 @@
+<dataConfig>
+    <dataSource type="JdbcDataSource" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost/all4m" user="root" password="dygim00n"/>
+    <document>
+        <entity name="track" query="select id, artist, title, CONCAT(artist, ' ', title) as artisttitle from Track">
+            <field column="id" name="id"/>
+            <field column="artist" name="artist"/>
+            <field column="title" name="title"/>
+            <field column="artisttitle" name="artisttitle"/>
+        </entity>
+    </document>
+</dataConfig>

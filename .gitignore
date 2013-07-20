@@ -7,3 +7,4 @@ config-*.yml
 cache/
 cachebust
 composer.lock
+db-data-config.xml
