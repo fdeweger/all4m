@@ -13,11 +13,6 @@ video_next:
     pattern: /video/next
     action: All4m\Video::next
 
-video_previous:
-    method: get
-    pattern: /video/previous
-    action: All4m\Video::previous
-
 video_flag:
     method: get
     pattern: /video/flag/{id}
@@ -27,3 +22,8 @@ video_get:
     method: get
     pattern: /video/get/{id}
     action: All4m\Video::getTrack
+
+video_search:
+    method: get
+    pattern: /search/{query}
+    action: All4m\Video::search

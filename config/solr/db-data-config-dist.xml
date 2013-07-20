@@ -1,7 +1,7 @@
 <dataConfig>
-    <dataSource type="JdbcDataSource" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost/all4m" user="root" password="dygim00n"/>
+    <dataSource type="JdbcDataSource" driver="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost/all4m" user="user" password="password"/>
     <document>
-        <entity name="track" query="select id, artist, title, CONCAT(artist, ' ', title) as artisttitle from Track">
+        <entity name="track" query="select id, artist, title, CONCAT(artist, ' ', title) as artisttitle from Track where youtubeId is not null and flags=0">
             <field column="id" name="id"/>
             <field column="artist" name="artist"/>
             <field column="title" name="title"/>

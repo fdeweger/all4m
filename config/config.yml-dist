@@ -29,3 +29,8 @@ urls:
     qmu: http://q-music.nl/muziek/playlist
 
 session_videos: 15
+
+solr:
+    host: localhost
+    port: 8081
+    path: /solr/all4m

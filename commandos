@@ -1,3 +1,4 @@
 ./vendor/bin/codecept run unit -v
 ./vendor/bin/doctrine orm:schema-tool:update --dump-sql
 sudo -u postgres psql -d all4m -f dump.sql -U postgres -W
+http://all4m.tv:8081/solr/all4m/select?defType=dismax&pf=artisttitle^10&q=mars+man&qf=artisttitle&q.op=AND

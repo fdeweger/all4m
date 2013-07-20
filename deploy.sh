@@ -22,6 +22,12 @@ if [ $? -ne 0 ]; then
         exit -2
 fi
 
+cp /home/frank/db-data-config.xml ./config/solr/
+if [ $? -ne 0 ]; then
+        echo "Copy of config file failed."
+        exit -2
+fi
+
 #generate assets
 php console dumpassets
 if [ $? -ne 0 ]; then
@@ -38,3 +44,4 @@ fi
 rm /srv/all4m/current
 ln -s /srv/all4m/$DIR /srv/all4m/current
 service varnish restart
+service tomcat6 restart

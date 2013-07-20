@@ -13,6 +13,7 @@ namespace All4m\Controller;
 use All4m\Components\ContainerAwareTrait;
 use All4m\Entity\Track;
 use Silex\Application;
+use Solarium\Client;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
@@ -114,6 +115,41 @@ class VideoController
         $response->flags = $app['session']->get('flags');
 
         return $app->json($response);
+    }
+
+    public function search(Request $request, Application $app, $query)
+    {
+        $query = $app->escape($query);
+
+        $config = array(
+            'endpoint' => array(
+                ' all4m' => $app['config']['solr']
+            )
+        );
+
+        $client = new Client($config);
+        $solrQuery = $client->createSelect();
+
+        $disMax = $solrQuery->getDisMax();
+        $disMax->setPhraseFields('artisttitle^100');
+        $disMax->setQueryFields('artisttitle');
+
+        $solrQuery->setQuery($query);
+        $solrQuery->setQueryDefaultOperator('AND');
+
+        $resultSet = $client->select($solrQuery);
+
+        $results = array();
+
+        foreach ($resultSet as $document) {
+            $result = new \stdClass();
+            $result->id = $document->id;
+            $result->artist = $document->artist;
+            $result->title = $document->title;
+            $results[] = $result;
+        }
+
+        return $app->json($results);
     }
 
     private function canFlag($plays, $flags) {

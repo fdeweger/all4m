@@ -48,7 +48,7 @@ class Router
                 $action = $this->translator->translateAction(($route['action']));
                 $routes[] = new Route($route['method'], $prefix . $route['pattern'], $action, $name);
             } else {
-                throw new RouteException('Route' . $name . ' is does not contain all required fields.');
+                throw new RouteException('Route' . $name . ' does not contain all required fields.');
             }
         }
 

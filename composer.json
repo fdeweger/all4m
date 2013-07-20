@@ -13,6 +13,7 @@
         "twig/twig": "1.6.5",
         "kriswallsmith/assetic": "1.1.x-dev",
         "mrclay/minify": "dev-master",
-        "natxet/CssMin": "dev-master"
+        "natxet/CssMin": "dev-master",
+        "solarium/solarium": "3.1.2"
     }
 }

@@ -13,11 +13,13 @@
 <div id="container" class="container">
 	<div id="header" class="container-small">
 		<a href="/" id="logo"></a>
-        <a href="#aboutModal" role="button" class="btn btn-primary" data-toggle="modal" style="float: right;">About All4M</a>
+        <div id='topbar-container'>
+            <input type='text' id='search' autocomplete='off' placeholder='Search a video clip...'/>
+            <a href="#aboutModal" role="button" class="btn btn-primary" data-toggle="modal" id="aboutButton">About All4M</a>
+        </div>
     </div>
 
 	<div id="videowrapper" class="container-small">
-
 		<div id="button-next"></div>
 		<div id="flagvideo">
 			<a href="#">This is not the real video</a>
@@ -26,7 +28,6 @@
         <div id="video">
 
         </div>
-
 	</div>
 
 	<div id="meta" class="container-small clearfix">
