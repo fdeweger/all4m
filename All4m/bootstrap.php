@@ -63,12 +63,11 @@ if ($config['monolog']) {
 $defaultFilters = array();
 $defaultFilters[] = new ArtistFilter('justin bieber');
 $defaultFilters[] = new ArtistFilter('nicky minaj');
-$defaultFilters[] = new ArtistFilter('nicki minaj');
 $defaultFilters[] = new ArtistFilter('k3');
 $defaultFilters[] = new ArtistFilter('kabouter plop');
 $defaultFilters[] = new ArtistFilter('sunclub');
-$defaultFilters[] = new ArtistFilter('anwb');
 $defaultFilters[] = new TitleFilter('last christmas');
+
 $pimple['default.filters'] = $defaultFilters;
 
 if (isset($config['session_videos'])) {

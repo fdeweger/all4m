@@ -3,7 +3,7 @@
 
 Vagrant.configure("2") do |config|
     config.vm.box = "ubuntu"
-    config.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/raring/current/raring-server-cloudimg-amd64-vagrant-disk1.box"
+    config.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/trusty/20161025/trusty-server-cloudimg-amd64-vagrant-disk1.box"
     config.vm.network :private_network, ip: "192.168.33.10"
 
     # Share an additional folder to the guest VM. The first argument is
@@ -30,10 +30,10 @@ Vagrant.configure("2") do |config|
     # #               Managed by Puppet.\n"
     # # }
     #
-#    config.vm.provision :puppet do |puppet|
-#        puppet.manifests_path = "puppet/manifests"
-#        puppet.module_path = "puppet/modules"
-#        puppet.manifest_file  = "init.pp"
-#        puppet.options = "--verbose --debug"
-#    end
+    config.vm.provision :puppet do |puppet|
+        puppet.manifests_path = "puppet/manifests"
+        puppet.module_path = "puppet/modules"
+        puppet.manifest_file  = "init.pp"
+        puppet.options = "--verbose --debug"
+    end
 end
